@@ -1,10 +1,11 @@
 #!/usr/bin/python
 #
-# Solution for Python Challenge #4
+# Solution for Python Challenge #6
 
-import webbrowser, requests, re
+import webbrowser, requests, pickle
 
-firsturl = "http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=63579"
+firsturl = "http://www.pythonchallenge.com/pc/def/peak.html"
+rawurl = "http://www.pythonchallenge.com/pc/def/banner.p"
 baseurl = "http://www.pythonchallenge.com/pc/def/"
 
 def gettext(url):
@@ -13,13 +14,11 @@ def gettext(url):
   return r.text
 
 def main():
-  i = 0
-  url=firsturl
-  while i < 400:
-    body = gettext(url)
-    print(body)
-    url=baseurl+"linkedlist.php?nothing="+body.split()[-1]
-    i += 1
+  p = pickle.load(open('./banner.p','rb'))
+  for line in p:
+    for chars in line:
+      print(chars[0]*chars[1], end='')
+    print()
       
 if __name__== "__main__":
   main()
